@@ -42,7 +42,8 @@
 		</dependency>
 	</dependencies>
 
-	<build>
+	<build> 
+	<finalName> rest-demo</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

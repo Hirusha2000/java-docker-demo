@@ -1,0 +1,46 @@
+# Dockerizing and Running Your Spring Boot Application
+
+# Step 1: Prepare Your Project
+# Ensure your Spring Boot JAR file is ready, e.g., myapp.jar
+
+# Step 2: Create Dockerfile
+# Create a file named Dockerfile in the same directory as your JAR with the following content:
+FROM openjdk:17-jdk-alpine
+WORKDIR /app
+COPY myapp.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
+# Step 3: Build Docker Image
+docker build -t my-springboot-app:1.0 .
+
+# Verify image
+docker images
+
+# Step 4: Run Container
+docker run -d -p 8080:8080 --name springboot-container my-springboot-app:1.0
+
+# Check running containers
+docker ps
+
+# Test the application in browser:
+# http://localhost:8080
+
+# Step 5: Save Image for Another Computer
+docker save -o my-springboot-app.tar my-springboot-app:1.0
+
+# Copy my-springboot-app.tar to the other computer
+
+# Step 6: Load Image on Another Computer
+docker load -i my-springboot-app.tar
+
+# Run it on the new computer
+docker run -d -p 8080:8080 --name springboot-container my-springboot-app:1.0
+
+# Summary:
+# 1. Prepare JAR
+# 2. Create Dockerfile
+# 3. Build image
+# 4. Run container
+# 5. Save image for transfer
+# 6. Load and run on another computer
